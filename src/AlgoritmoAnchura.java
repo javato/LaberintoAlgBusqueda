@@ -16,8 +16,8 @@ import java.util.Stack;
  *
  * @author Yo-PC
  */
-public class Arbol extends SearchAlgorithm /*implements SearchProblem*/{
-    
+public class AlgoritmoAnchura extends SearchAlgorithm /*implements SearchProblem*/{
+    public ArrayList<Action> resultado = new ArrayList<Action>();
     /*
     @Override
     public State initialState() {
@@ -75,58 +75,86 @@ public class Arbol extends SearchAlgorithm /*implements SearchProblem*/{
         }
         */
         
-//        HashSet<State> cerrados = new HashSet<State>();
-//        Queue<Node> abiertos = new LinkedList<Node>();
-//        
-//        ArrayList<Node> sucesores = new ArrayList<Node>();
-//        ArrayList<Action> resultado = new ArrayList<Action>();
-//        int obj=0;
+        HashSet<State> cerrados = new HashSet<State>();
+        Queue<Node> abiertos = new LinkedList<Node>();
         
-//        while(obj==0){
-//        if(!abiertos.peek().getState().equals(problem.goalState())){
-//            if(cerrados.contains(abiertos.peek().getState())){
-//                abiertos.remove();
-//            }
-//            else{
-//                sucesores = getSuccessors(abiertos.peek());
-//                cerrados.add(abiertos.peek().getState());
-//                abiertos.remove();
-//
-//                while(!sucesores.isEmpty()){
-//                    abiertos.add(sucesores.get(i));
-//                    sucesores.remove(i);
-//                    i++;
-//                }
-//
-//            }
-//        }
-//        else{
-//           obj=1; 
-//           
-//            System.out.println("ejecutando");
-//           Stack<Node> nodos = new Stack<Node>();
-//           nodos.add(abiertos.peek());
-//           
-//////           while(nodos.firstElement().getState()!=problem.initialState()){
-//////               resultado.add(nodos.firstElement().getAction());
-//////               nodos.add(nodos.firstElement().getParent());
-//////           }
-//           
-//        }
-//        }
+        ArrayList<Node> sucesores = new ArrayList<Node>();
+        
+        int obj=0;
+        
+        System.out.println("goalState: " + problem.goalState());
+        
+        
+        
+        abiertos.add(new Node(problem.initialState()));
+        
+                
+        System.out.println("inicial "+problem.initialState());        
+                
+        while(obj==0){
+         
+        if(!abiertos.peek().getState().equals(problem.goalState())){
+            
+            if(cerrados.contains(abiertos.peek().getState())){
+                abiertos.remove();
+            }
+            else{
+                sucesores = getSuccessors(abiertos.peek());
+                cerrados.add(abiertos.peek().getState());
+                abiertos.remove();
+                
+                while(!sucesores.isEmpty()){
+                    
+                    
+                    abiertos.add(sucesores.get(i));
+                    
+                    sucesores.remove(i);
+                    
+                }
+                i=0;
+            }
+        }
+        else{
+           obj=1; 
+           
+           System.out.println("ejecutando");
+           Stack<Node> nodos = new Stack<Node>();
+           nodos.add(abiertos.peek());
+           
+           while(nodos.peek().getState()!=problem.initialState()){
+               //resultado.add(nodos.peek().getAction());
+              
+               nodos.add(nodos.peek().getParent());
+               
+               System.out.println("nodos: "+ nodos);
+           }
+           
+           while(!nodos.isEmpty()){
+               if(!nodos.peek().getState().equals(problem.initialState()))
+           resultado.add(nodos.pop().getAction());
+               else
+                   nodos.pop();
+               
+           }
+           System.out.println("acciones: "+ resultado);
+        result();
+        }
+        
+            
+        }
     }
     
 
     @Override
     public ArrayList<Action> result() {
-        ArrayList<Action> resultado = new ArrayList<Action>();
         
+        System.out.println("resultado en result: "+resultado);
         //Collections.reverse(resultado);
         
-        resultado.add(Action.DOWN);
-        resultado.add(Action.DOWN);
-        resultado.add(Action.DOWN);
-        
+//        resultado.add(Action.DOWN);
+//        resultado.add(Action.DOWN);
+//        resultado.add(Action.DOWN);
+//        
                 
         
         
