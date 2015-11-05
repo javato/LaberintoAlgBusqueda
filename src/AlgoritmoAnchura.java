@@ -28,7 +28,7 @@ public class AlgoritmoAnchura extends SearchAlgorithm /*implements SearchProblem
         HashSet<State> cerrados = new HashSet<State>();
         Queue<Node> abiertos = new LinkedList<Node>();
         ArrayList<Node> sucesores = new ArrayList<Node>();
-        
+
         
         System.out.println("Nodo inicial: "+problem.initialState()); 
         System.out.println("Nodo final: " + problem.goalState());
@@ -38,12 +38,13 @@ public class AlgoritmoAnchura extends SearchAlgorithm /*implements SearchProblem
         while(control == false){
          
         if(!abiertos.peek().getState().equals(problem.goalState())){
-            
+            System.out.println("abiertos: "+abiertos);
             if(cerrados.contains(abiertos.peek().getState())){
                 abiertos.remove();
             }
             else{
                 sucesores = getSuccessors(abiertos.peek());
+                System.out.println("sucesores: "+sucesores);
                 cerrados.add(abiertos.peek().getState());
                 abiertos.remove();
                 
@@ -87,11 +88,7 @@ public class AlgoritmoAnchura extends SearchAlgorithm /*implements SearchProblem
     public ArrayList<Action> result() {
         
         System.out.println("resultado en result: "+resultado);
-        //Collections.reverse(resultado);
-        
-//        resultado.add(Action.DOWN);
-//        resultado.add(Action.DOWN);
-//        resultado.add(Action.DOWN);
+
     
         return resultado;        
     }

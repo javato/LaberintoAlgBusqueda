@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author Yo-PC
  */
-public class AlgoritmoAEstrella extends SearchAlgorithm /*implements SearchProblem*/{
+public class AlgoritmoCosteUniforme extends SearchAlgorithm /*implements SearchProblem*/{
     public ArrayList<Action> resultado = new ArrayList<Action>();
     
     @Override
@@ -53,11 +53,11 @@ public class AlgoritmoAEstrella extends SearchAlgorithm /*implements SearchProbl
                         abiertos.add(sucesores.get(0));
                         sucesores.remove(0);
                     }
-                    else if (sucesores.get(0).getHeuristic() + problem.cost(problem.initialState(),sucesores.get(0).getAction())> abiertos.get(abiertos.size()-1).getHeuristic() + problem.cost(problem.initialState(), abiertos.get(abiertos.size()-1).getAction())){
+                    else if (problem.cost(problem.initialState(),sucesores.get(0).getAction())>problem.cost(problem.initialState(), abiertos.get(abiertos.size()-1).getAction())){
                         abiertos.add(abiertos.size(),sucesores.get(0));
                         sucesores.remove(0);
                     }
-                    else if (sucesores.get(0).getHeuristic() + problem.cost(problem.initialState(),sucesores.get(0).getAction())<= abiertos.get(i).getHeuristic() + problem.cost(problem.initialState(),abiertos.get(i).getAction()))
+                    else if (problem.cost(problem.initialState(),sucesores.get(0).getAction())<=problem.cost(problem.initialState(),abiertos.get(i).getAction()))
                     {
                         
                         abiertos.add(i,sucesores.get(0));
@@ -73,12 +73,12 @@ public class AlgoritmoAEstrella extends SearchAlgorithm /*implements SearchProbl
         else{
            control = true; 
            
-           
+           System.out.println("ejecutando");
            Stack<Node> nodos = new Stack<Node>();
            nodos.add(abiertos.get(0));
            
            while(nodos.peek().getState()!=problem.initialState()){
-               
+               //resultado.add(nodos.peek().getAction());
               
                nodos.add(nodos.peek().getParent());
                

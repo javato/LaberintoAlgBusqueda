@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author Yo-PC
  */
-public class AlgoritmoAEstrella extends SearchAlgorithm /*implements SearchProblem*/{
+public class AlgoritmoPrimeroMejor extends SearchAlgorithm /*implements SearchProblem*/{
     public ArrayList<Action> resultado = new ArrayList<Action>();
     
     @Override
@@ -53,11 +53,11 @@ public class AlgoritmoAEstrella extends SearchAlgorithm /*implements SearchProbl
                         abiertos.add(sucesores.get(0));
                         sucesores.remove(0);
                     }
-                    else if (sucesores.get(0).getHeuristic() + problem.cost(problem.initialState(),sucesores.get(0).getAction())> abiertos.get(abiertos.size()-1).getHeuristic() + problem.cost(problem.initialState(), abiertos.get(abiertos.size()-1).getAction())){
+                    else if (sucesores.get(0).getHeuristic()>abiertos.get(abiertos.size()-1).getHeuristic()){
                         abiertos.add(abiertos.size(),sucesores.get(0));
                         sucesores.remove(0);
                     }
-                    else if (sucesores.get(0).getHeuristic() + problem.cost(problem.initialState(),sucesores.get(0).getAction())<= abiertos.get(i).getHeuristic() + problem.cost(problem.initialState(),abiertos.get(i).getAction()))
+                    else if (sucesores.get(0).getHeuristic()<=abiertos.get(i).getHeuristic())
                     {
                         
                         abiertos.add(i,sucesores.get(0));

@@ -44,8 +44,9 @@ public class AlgoritmoProfundidad extends SearchAlgorithm /*implements SearchPro
             }
             else{
                 sucesores = getSuccessors(abiertos.peek());
+                System.out.println("expandiendo : " + abiertos.peek());
                 cerrados.add(abiertos.peek().getState());
-                System.out.println("abiertos: "+ abiertos);
+                //System.out.println("abiertos: "+ abiertos);
                 abiertos.pop();
                 
                 while(!sucesores.isEmpty()){
@@ -57,21 +58,20 @@ public class AlgoritmoProfundidad extends SearchAlgorithm /*implements SearchPro
         else{
            control = true; 
            
-           System.out.println("ejecutando");
+           
            Stack<Node> nodos = new Stack<Node>();
            nodos.add(abiertos.peek());
            
            while(nodos.peek().getState()!=problem.initialState()){
-               //resultado.add(nodos.peek().getAction());
-              
+               
                nodos.add(nodos.peek().getParent());
                
-               System.out.println("nodos: "+ nodos);
+               //System.out.println("nodos: "+ nodos);
            }
            
            while(!nodos.isEmpty()){
                if(!nodos.peek().getState().equals(problem.initialState())){
-                   System.out.println("coste: " + nodos.peek().getCost());
+                   //System.out.println("coste: " + nodos.peek().getCost());
            resultado.add(nodos.pop().getAction());
                }
                else
@@ -88,11 +88,7 @@ public class AlgoritmoProfundidad extends SearchAlgorithm /*implements SearchPro
     public ArrayList<Action> result() {
         
         System.out.println("resultado en result: "+resultado);
-        //Collections.reverse(resultado);
-        
-//        resultado.add(Action.DOWN);
-//        resultado.add(Action.DOWN);
-//        resultado.add(Action.DOWN);
+
     
         return resultado;        
     }
